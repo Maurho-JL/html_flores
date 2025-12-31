@@ -1374,3 +1374,27 @@ body, .particle, .lightParticle, .message {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation; /* mejora la respuesta al toque */
 }
+
+/* Mensaje inicial */
+.startMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Georgia', 'Times New Roman', serif; /* letra elegante */
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffd65f;
+  text-shadow: 0 0 10px #ffd65f, 0 0 20px #ff5fd2;
+  pointer-events: none;
+  opacity: 1;
+  animation: floatPulse 2s infinite alternate;
+}
+
+/* Animación flotante y suave */
+@keyframes floatPulse {
+  0% { transform: translate(-50%, -50%) translateY(0px) scale(1); }
+  50% { transform: translate(-50%, -50%) translateY(-15px) scale(1.05); }
+  100% { transform: translate(-50%, -50%) translateY(0px) scale(1); }
+}
+

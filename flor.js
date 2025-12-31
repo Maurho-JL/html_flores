@@ -120,3 +120,17 @@ document.addEventListener("touchend", (e) => {
 document.addEventListener("touchend", (e) => {
     e.preventDefault(); // evita zoom y otros gestos predeterminados
 });
+
+const startMessage = document.querySelector(".startMessage");
+
+function removeStartMessage() {
+    if (startMessage) {
+        startMessage.style.transition = "opacity 0.5s";
+        startMessage.style.opacity = 0;
+        setTimeout(() => startMessage.remove(), 500);
+    }
+}
+
+// Llamar al primer clic/tap
+document.addEventListener("click", removeStartMessage, { once: true });
+document.addEventListener("touchstart", removeStartMessage, { once: true });
