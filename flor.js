@@ -1,27 +1,14 @@
-
 onload = () => {
-    const c = setTimeout(() => {
-      document.body.classList.remove("not-loaded");
-      clearTimeout(c);
-    }, 1000);
-  };
-
-
+    setTimeout(() => document.body.classList.remove("not-loaded"), 1000);
+};
 
 // Mensajes posibles
 const messages = ["Te quiero", "Eres hermosa", "Eres genial", "Me encantas", 
-  "Eres especial", "Me haces sonreir" , "Divina!","Am!"];
+  "Eres especial", "Me haces sonreir", "Divina!", "Una lindura","❤️​","🤗​","✨"];
 
-document.addEventListener("click", (e) => {
-    
-
-    createParticles(e.clientX, e.clientY);
-    showMessage(e.clientX, e.clientY);
-});
-
+// Partículas y mensajes
 function createParticles(x, y) {
     const colors = ["#ff5fd2", "#9b5cff", "#5fdcff", "#ffd65f", "#ffffff"];
-
     for (let i = 0; i < 18; i++) {
         const particle = document.createElement("div");
         particle.classList.add("particle");
@@ -32,12 +19,10 @@ function createParticles(x, y) {
         particle.style.left = x + "px";
         particle.style.top = y + "px";
         particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-
         particle.style.setProperty("--x", Math.cos(angle) * distance + "px");
         particle.style.setProperty("--y", Math.sin(angle) * distance + "px");
 
         document.body.appendChild(particle);
-
         setTimeout(() => particle.remove(), 1000);
     }
 }
@@ -46,90 +31,74 @@ function showMessage(x, y) {
     const message = document.createElement("span");
     message.classList.add("message");
     message.textContent = messages[Math.floor(Math.random() * messages.length)];
-
     message.style.left = x + "px";
     message.style.top = y + "px";
-
     document.body.appendChild(message);
-
-    // Eliminar mensaje después de la animación
     setTimeout(() => message.remove(), 1500);
 }
 
-
-// Doble clic para show de luces
-
-document.addEventListener("dblclick", (e) => {
-    createChristmasLights(e.clientX, e.clientY);
-});
-
-function createChristmasLights(x, y) {
-    const colors = ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff", "#ffffff"];
-    
-    for (let i = 0; i < 80; i++) { // muchas partículas para efecto show
-        const particle = document.createElement("div");
-        particle.classList.add("lightParticle");
-
-        const angle = Math.random() * Math.PI * 2;
-        const distance = Math.random() * 300; // gran dispersión
-
-        particle.style.left = x + "px";
-        particle.style.top = y + "px";
-        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-
-        particle.style.setProperty("--x", Math.cos(angle) * distance + "px");
-        particle.style.setProperty("--y", Math.sin(angle) * distance + "px");
-
-        document.body.appendChild(particle);
-
-        setTimeout(() => particle.remove(), 1500);
-    }
-}
-
+// Función para partículas + mensaje
 function handleClick(x, y) {
     createParticles(x, y);
     showMessage(x, y);
 }
 
-// Desktop
-document.addEventListener("click", (e) => handleClick(e.clientX, e.clientY));
+// Luces navideñas
+function createChristmasLights(x, y) {
+    const colors = ["#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff", "#ffffff"];
+    for (let i = 0; i < 80; i++) {
+        const particle = document.createElement("div");
+        particle.classList.add("lightParticle");
 
-// Móviles
-document.addEventListener("touchstart", (e) => {
-    const touch = e.touches[0];
-    handleClick(touch.clientX, touch.clientY);
-});
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 300;
 
-// Desktop
-document.addEventListener("dblclick", (e) => {
-    createChristmasLights(e.clientX, e.clientY);
-});
+        particle.style.left = x + "px";
+        particle.style.top = y + "px";
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.setProperty("--x", Math.cos(angle) * distance + "px");
+        particle.style.setProperty("--y", Math.sin(angle) * distance + "px");
 
-// Móviles: doble tap
-let lastTap = 0;
-document.addEventListener("touchend", (e) => {
-    const currentTime = new Date().getTime();
-    const tapLength = currentTime - lastTap;
-    if (tapLength < 300 && tapLength > 0) { // doble tap
-        const touch = e.changedTouches[0];
-        createChristmasLights(touch.clientX, touch.clientY);
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 1500);
     }
-    lastTap = currentTime;
-});
+}
 
-document.addEventListener("touchend", (e) => {
-    e.preventDefault(); // evita zoom y otros gestos predeterminados
-});
+// --- LISTENERS ---
 
+// Primer clic/tap: mensaje inicial desaparece
 const startMessage = document.querySelector(".startMessage");
-
-function removeStartMessage() {
+document.addEventListener("pointerdown", () => {
     if (startMessage) {
         startMessage.style.transition = "opacity 0.5s";
         startMessage.style.opacity = 0;
         setTimeout(() => startMessage.remove(), 500);
     }
-}
+}, { once: true });
 
-// Se dispara al primer clic o toque en cualquier parte
-document.addEventListener("pointerdown", removeStartMessage, { once: true });
+// Partículas y mensajes
+document.addEventListener("click", (e) => handleClick(e.clientX, e.clientY));
+document.addEventListener("touchstart", (e) => {
+    const touch = e.touches[0];
+    handleClick(touch.clientX, touch.clientY);
+});
+
+// Luces navideñas: doble clic desktop
+document.addEventListener("dblclick", (e) => {
+    createChristmasLights(e.clientX, e.clientY);
+    if (navigator.vibrate) navigator.vibrate(200);
+});
+
+// Luces navideñas: doble tap móvil
+let lastTap = 0;
+document.addEventListener("touchend", (e) => {
+    const currentTime = new Date().getTime();
+    const tapLength = currentTime - lastTap;
+    if (tapLength < 300 && tapLength > 0) {
+        const touch = e.changedTouches[0];
+        createChristmasLights(touch.clientX, touch.clientY);
+        if (navigator.vibrate) navigator.vibrate([100,50,100]);
+    }
+    lastTap = currentTime;
+    e.preventDefault(); // evita zoom y flash azul
+});
