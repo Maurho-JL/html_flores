@@ -1384,8 +1384,8 @@ body, .particle, .lightParticle, .message {
   font-family: 'Georgia', 'Times New Roman', serif;
   font-size: 32px;
   font-weight: bold;
-  color: #ffd65f;
-  text-shadow: 0 0 10px #ffd65f, 0 0 20px #ff5fd2;
+  color: #f1f0ee;
+  text-shadow: 0 0 10px #fbfbfb, 0 0 20px hsl(320, 29%, 94%);
   pointer-events: none; /* importante para que los clics pasen a document */
   opacity: 1;
   z-index: 9999; /* encima de todo */
