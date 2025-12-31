@@ -1368,3 +1368,9 @@ body {
 .particle, .lightParticle, .message {
   pointer-events: none; /* evita que interfiera con el toque */
 }
+
+/* Desactivar resalte azul/verde al tocar */
+body, .particle, .lightParticle, .message {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation; /* mejora la respuesta al toque */
+}

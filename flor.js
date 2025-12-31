@@ -117,3 +117,6 @@ document.addEventListener("touchend", (e) => {
     lastTap = currentTime;
 });
 
+document.addEventListener("touchend", (e) => {
+    e.preventDefault(); // evita zoom y otros gestos predeterminados
+});
