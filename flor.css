@@ -1377,21 +1377,21 @@ body, .particle, .lightParticle, .message {
 
 /* Mensaje inicial */
 .startMessage {
-  position: absolute;
-  top: 50%;
+  position: fixed; /* importante para que siempre esté visible */
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Georgia', 'Times New Roman', serif; /* letra elegante */
+  font-family: 'Georgia', 'Times New Roman', serif;
   font-size: 32px;
   font-weight: bold;
   color: #ffd65f;
   text-shadow: 0 0 10px #ffd65f, 0 0 20px #ff5fd2;
-  pointer-events: none;
+  pointer-events: none; /* importante para que los clics pasen a document */
   opacity: 1;
+  z-index: 9999; /* encima de todo */
   animation: floatPulse 2s infinite alternate;
 }
 
-/* Animación flotante y suave */
 @keyframes floatPulse {
   0% { transform: translate(-50%, -50%) translateY(0px) scale(1); }
   50% { transform: translate(-50%, -50%) translateY(-15px) scale(1.05); }

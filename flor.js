@@ -131,6 +131,5 @@ function removeStartMessage() {
     }
 }
 
-// Llamar al primer clic/tap
-document.addEventListener("click", removeStartMessage, { once: true });
-document.addEventListener("touchstart", removeStartMessage, { once: true });
+// Se dispara al primer clic o toque en cualquier parte
+document.addEventListener("pointerdown", removeStartMessage, { once: true });
