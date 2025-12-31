@@ -4,7 +4,7 @@ onload = () => {
 
 // Mensajes posibles
 const messages = ["Te quiero", "Eres hermosa", "Eres genial", "Me encantas", 
-  "Eres especial", "Me haces sonreir", "Divina!", "Una lindura","❤️​","🤗​","✨"];
+  "Eres especial", "Me haces sonreir", "Divina!", "Una lindura","Am!","❤️​","🤗​","✨"];
 
 // Partículas y mensajes
 function createParticles(x, y) {
